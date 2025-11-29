@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: auto-crm-backend
+  datasource:
+    url: jdbc:mysql://localhost:3306/auto_crm?useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  sql:
+    init:
+      mode: never
+  neo4j:
+    uri: bolt://localhost:7687
+    authentication:
+      username: neo4j
+      password: neo4j
+  redis:
+    host: localhost
+    port: 6379
+    password: ""
+  security:
+    jwt:
+      secret: stellarcrm_secret_key_for_jwt_signing_with_sufficient_length_for_hs512_algorithm_which_requires_at_least_512_bits
+      expiration: 86400000 # 24小时24 hours
+
+logging:
+  level:
+    com.stellarcrm: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+
+# Custom application properties
+app:
+  ai-service:
+    enabled: true
+    endpoint: http://localhost:8000/api/v1/predict
